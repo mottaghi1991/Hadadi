@@ -24,7 +24,7 @@ namespace Personal.MiddleWare
             var User=httpContext.User;
             if(!User.Identity.IsAuthenticated)
             {
-                httpContext.Response.Redirect("/Login");
+                httpContext.Response.Redirect("/Smslogin");
                 return Task.CompletedTask;
             }
             var Permission= new List<PermissionList>();

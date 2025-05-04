@@ -25,5 +25,8 @@ namespace Core.Interface.Exam
         public IEnumerable<ExamDetailItem> GetHalandResultDetailByUserId(int UserId);
         public IEnumerable<ExamDetailItem> GetMBTIResultDetailByUserId(int UserId);
         public IEnumerable<ExamDetailItem> GetAnageramResultDetailByUserId(int UserId);
+        public bool UpdateUserToPay(int UserId, int ExamId);
+        public UserExam GetUserExamByUserAndExam(int UserId, int ExamId);
+        public bool UpdateExam(ExamList examList);
     }
 }

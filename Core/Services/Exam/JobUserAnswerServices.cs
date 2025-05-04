@@ -20,7 +20,16 @@ namespace Core.Services.Exam
 
         public bool BulkInsert(List<JobUserAnswer> jobUserAnswers)
         {
+
             return _master.BulkeInsert(jobUserAnswers);  
+        }
+
+        public int GetLastQuestionNumber(int UserId)
+        {
+            var obj = _master.GetAllEf(a => a.UserId == UserId).OrderByDescending(a=>a.JobQuestionId).FirstOrDefault();
+            if( obj == null)
+                return 0;
+           return obj.JobQuestionId;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Domain.Exam;
+using Domain.Payment;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +20,7 @@ namespace Domain.User
         [Display(Name = "کاربر سیستم")]
         [MaxLength(50, ErrorMessage = "بیشتر مقدار{0}می باشد")]
         public string UserName { get; set; }
-        [Required(ErrorMessage = "وارد کردن {0} اجباری می باشد")]
+        
         [Display(Name = "ایمیل")]
         [EmailAddress(ErrorMessage = "فرمت وراد صحیح نمی باشد")]
         public string Email { get; set; }
@@ -29,6 +30,10 @@ namespace Domain.User
         [Display(Name = "کد فعال سازی")]
         [Required(ErrorMessage = "وارد کردن {0} اجباری می باشد")]
         public string ActiveCode { get; set; }
+        [Display(Name = "نام")]
+        public string? Name { get; set; }
+        [Display(Name = "نام خانوادگی")]
+        public string? Family { get; set; }
         public bool IsActive { get; set; }
         public DateTime RegisterDate { get; set; }
         public string UserAvatar { get; set; }
@@ -38,6 +43,8 @@ namespace Domain.User
         public virtual IEnumerable<ExamEvent> ExamEvents { get; set; }
         public virtual IEnumerable<NinUserAnswer> NinUserAnswers { get; set; }
         public virtual IEnumerable<UserExam> UserExams{ get; set; }
+        public virtual IEnumerable<PaymentEventDatabase> PaymentEventDatabases{ get; set; }
+        public virtual IEnumerable<PaymentFinalEvent> PaymentFinalEvents{ get; set; }
 
 
 

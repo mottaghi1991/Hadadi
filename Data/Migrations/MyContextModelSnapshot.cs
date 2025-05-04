@@ -76,6 +76,9 @@ namespace Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -205,6 +208,9 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
+
+                    b.Property<int>("SeriShow")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -537,6 +543,9 @@ namespace Data.Migrations
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsPay")
+                        .HasColumnType("bit");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -547,6 +556,140 @@ namespace Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserExams", "dbo");
+                });
+
+            modelBuilder.Entity("Domain.Payment.PaymentEventDatabase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("authority")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("code")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("fee")
+                        .HasColumnType("int");
+
+                    b.Property<string>("fee_type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PaymentEventDatabases", "dbo");
+                });
+
+            modelBuilder.Entity("Domain.Payment.PaymentFinalEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("card_hash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("card_pan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("code")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("fee")
+                        .HasColumnType("int");
+
+                    b.Property<string>("fee_type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ref_id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PaymentFinalEvents", "dbo");
+                });
+
+            modelBuilder.Entity("Domain.SMS.UserOtp", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpireAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserOtps", "dbo");
                 });
 
             modelBuilder.Entity("Domain.User.MyUser", b =>
@@ -560,7 +703,9 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Family")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -568,6 +713,9 @@ namespace Data.Migrations
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PassWord")
                         .IsRequired()
@@ -847,6 +995,44 @@ namespace Data.Migrations
                     b.Navigation("myUser");
                 });
 
+            modelBuilder.Entity("Domain.Payment.PaymentEventDatabase", b =>
+                {
+                    b.HasOne("Domain.Exam.ExamList", "examList")
+                        .WithMany()
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User.MyUser", "myUser")
+                        .WithMany("PaymentEventDatabases")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("examList");
+
+                    b.Navigation("myUser");
+                });
+
+            modelBuilder.Entity("Domain.Payment.PaymentFinalEvent", b =>
+                {
+                    b.HasOne("Domain.Exam.ExamList", "examList")
+                        .WithMany()
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User.MyUser", "myUser")
+                        .WithMany("PaymentFinalEvents")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("examList");
+
+                    b.Navigation("myUser");
+                });
+
             modelBuilder.Entity("Domain.User.MyUser", b =>
                 {
                     b.HasOne("Domain.Exam.UserAnswer", null)
@@ -959,6 +1145,10 @@ namespace Data.Migrations
                     b.Navigation("JobUserAnswers");
 
                     b.Navigation("NinUserAnswers");
+
+                    b.Navigation("PaymentEventDatabases");
+
+                    b.Navigation("PaymentFinalEvents");
 
                     b.Navigation("UserExams");
 

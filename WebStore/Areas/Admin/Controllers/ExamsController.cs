@@ -21,6 +21,7 @@ namespace Personal.Areas.Admin.Controllers
         private readonly IExamResult _examResult;
         private readonly IExamResultFinals _examResultFinal;
         private readonly IUser _user;
+       
 
         public ExamsController(IExamResult examResult, IExamResultFinals examResultFinal, IUser user)
         {
@@ -44,6 +45,7 @@ namespace Personal.Areas.Admin.Controllers
             {
                 ExamId=ExamId,
                 ExamTitle=Exam.Title,
+
                 UsersList= _examResult.GetListOfUserDoneExam(ExamId)
             });
         }
@@ -110,6 +112,41 @@ namespace Personal.Areas.Admin.Controllers
 
               
         }
+        public IActionResult ShowExamList()
+        {
+            return View(_examResult.examLists());
+        }
+        [HttpGet]
+        public IActionResult Update(int ExamId)
+        {
+            var exam=_examResult.examById(ExamId);
+            if (exam == null)
+            {
+                return NotFound();
+            }
 
-    }
+            return View(exam);
+        }
+        [HttpPost]
+        public IActionResult Update(ExamList exam)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(exam);
+            }
+            var result = _examResult.UpdateExam(exam);
+                if(result)
+            {
+                TempData[Success] = SuccessMessage;
+                return RedirectToAction("ShowExamList");
+            }
+            else
+            {
+                TempData[Error]=ErrorMessage;
+                return View(exam);
+            }
+        }
+
+
+        }
 }

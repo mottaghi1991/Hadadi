@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using static WebStore.Base.BaseController;
 using EventId = Domain.EventId;
 
 namespace WebStore.Controller
@@ -24,7 +25,7 @@ namespace WebStore.Controller
         {
       
             _logger.LogWarning("sessonid={SessionId}",HttpContext.Session.Id);
-            return View();
+            return RedirectToAction("Index", "Exams", new { area = AreaNames.UserPanel });
         }
         [ResponseCache(Duration = 0,Location = ResponseCacheLocation.None,NoStore = true)]
         [Route("/Error")]

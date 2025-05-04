@@ -69,6 +69,7 @@ namespace Core.Services.Exam
 
          
         }
+        
 
         public NinQuestion GetNinQuestionById(int NinQuestionId)
         {

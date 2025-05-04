@@ -14,6 +14,10 @@ namespace Domain.Exam
         [MaxLength(50, ErrorMessage = "طول رشته بیشتر از 50 کاراکتر می باشد")]
         [Required(ErrorMessage = "وارد کردن {0} اجباری می باشد")]
         public string Title { get; set; }
+        [DisplayName("هزینه آزمون")]
+      
+        [Required(ErrorMessage = "وارد کردن {0} اجباری می باشد")]
+        public int Price { get; set; }
         public virtual IEnumerable<ExamEvent> ExamEvents { get; set; }
         public virtual IEnumerable<UserExam> UserExams { get; set; }
         public virtual IEnumerable<ExamResultFinal> ExamResultFinals{ get; set; }

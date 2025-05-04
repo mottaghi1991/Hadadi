@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Core.Dto.ViewModel.User;
+using Core.Dto.ViewModel.User.Login;
 using Domain;
 using Domain.User;
 using Domain.Users;
+using Microsoft.AspNetCore.Http;
 
 
 namespace Core.Interface.Users
@@ -28,5 +30,7 @@ namespace Core.Interface.Users
     IEnumerable<ShowUserBrifViewModel> GetPAggingUser(int Page,int pagesize);
     IEnumerable<ShowUserBrifViewModel> GetAllAdmin();
         public MyUser GetUserByUserId(int userId);
+        public MyUser GetOrCreateUser(string phoneNumber);
+        public void SignIn(HttpContext context, MyUser user);
     }
 }

@@ -1,0 +1,14 @@
+2025-05-03 14:59:27.869 +03:30 [Error] (NoorMehr.) (Data Error) User Run Delete and Get Error  ObjectName= "UserOtp" and userId = 0 and return False
+System.InvalidOperationException: The property 'UserOtp.Id' has a temporary value while attempting to change the entity's state to 'Deleted'. Either set a permanent value explicitly, or ensure that the database is configured to generate values for this property.
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState oldState, EntityState newState, Boolean acceptChanges, Boolean modifyProperties)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState entityState, Boolean acceptChanges, Boolean modifyProperties, Nullable`1 forceStateWhenUnknownKey, Nullable`1 fallbackState)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.set_State(EntityState value)
+   at Microsoft.EntityFrameworkCore.DbContext.Remove[TEntity](TEntity entity)
+   at Data.MasterServices.MasterServices`1.Delete(T Obj) in H:\GitProject\Hadadi\Data\MasterServices\MasterServices.cs:line 154
+2025-05-03 15:02:11.046 +03:30 [Error] (NoorMehr.) (Data Error) User Run Delete and Get Error  ObjectName= "UserOtp" and userId = 0 and return False
+System.InvalidOperationException: The property 'UserOtp.Id' has a temporary value while attempting to change the entity's state to 'Deleted'. Either set a permanent value explicitly, or ensure that the database is configured to generate values for this property.
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState oldState, EntityState newState, Boolean acceptChanges, Boolean modifyProperties)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.SetEntityState(EntityState entityState, Boolean acceptChanges, Boolean modifyProperties, Nullable`1 forceStateWhenUnknownKey, Nullable`1 fallbackState)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.set_State(EntityState value)
+   at Microsoft.EntityFrameworkCore.DbContext.Remove[TEntity](TEntity entity)
+   at Data.MasterServices.MasterServices`1.Delete(T Obj) in H:\GitProject\Hadadi\Data\MasterServices\MasterServices.cs:line 154

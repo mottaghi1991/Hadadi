@@ -10,5 +10,6 @@ namespace Core.Interface.Exam
     public interface IJobUserNaswer
     {
         public bool BulkInsert(List<JobUserAnswer> jobUserAnswers);
+        public int GetLastQuestionNumber(int UserId);
     }
 }

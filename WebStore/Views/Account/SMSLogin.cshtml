@@ -1,0 +1,117 @@
+﻿@model Core.Dto.ViewModel.User.Login.SmsLoginViModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <title>ورود به سیستم</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* مرکز عمودی */
+            align-items: center; /* مرکز افقی */
+            font-family: 'Vazir', sans-serif;
+            direction: rtl;
+            background-image: url(/img/background.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .signup-login-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+            .signup-login-box img {
+                display: block;
+                margin: 0 auto 1.5rem auto;
+                max-width: 150px;
+            }
+
+        .signup-login-input {
+            border-radius: 10px;
+        }
+
+        .login-btn {
+            width: 100%;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .timer {
+            font-size: 14px;
+            color: #ff0000;
+            margin-top: 10px;
+        }
+    </style>
+    <partial name="_HeaderLink" />
+</head>
+<body>
+    <div class="signup-login-box">
+        <!-- start signup & login box -->
+
+        <img src="~/img/logo.png" alt="لوگو">
+        <form id="phoneForm">
+
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+            <div id="phoneError" class="text-danger mb-3" style="color:red; display:none;">شماره نامعتبر است</div>
+
+            <div class="input-group signup-login-form mb-3">
+                <input name="UserName" type="text" class="form-control form-control-lg signup-login-input text-start" id="UserName" placeholder="شماره موبایل">
+
+            </div>
+            <button type="submit" class="btn btn-danger d-block font-12 login-btn mb-4">
+                ورود
+            </button>
+
+
+        </form>
+        <form id="codeForm" class="hidden">
+            <div class="input-group signup-login-form mb-3">
+                <input type="text" id="Code" class="form-control form-control-lg signup-login-input text-start" placeholder="کد تایید" />
+            </div>
+            <button type="submit" class="btn btn-danger d-block font-12 login-btn mb-4">
+                تایید کد
+            </button>
+
+            <!-- نمایش زمان باقی‌مانده -->
+            <div id="timer" class="timer">زمان باقی‌مانده: <span id="timeLeft">2:00</span></div>
+            <a href="#" id="Resend">ارسال مجدد</a>
+        </form>
+    </div>
+
+
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="_Message" />
+    <partial name="_FooterLink" />
+    <script src="~/js/ConfirmPhoneNumber.js"></script>
+    <script>
+              document.addEventListener('DOMContentLoaded', function () {
+            setupPhoneForm();
+            setupCodeForm();
+        });
+
+    </script>
+
+</body>
+</html>

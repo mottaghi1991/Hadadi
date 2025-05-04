@@ -43,6 +43,7 @@ namespace WebStore.Areas.Admin.Controllers
             return View(new ShowUserBrifViewModel()
             {
                 UserName = Username,
+                
             });
         }
    

@@ -16,6 +16,7 @@ namespace Domain.Exam
         public int Id { get; set; }
         public int UserId { get; set; }
         public int ExamId { get; set; }
+        public Boolean IsPay { get; set; } = false;
         [ForeignKey("UserId")]
         public MyUser myUser{ get; set; }
         [ForeignKey("ExamId")]

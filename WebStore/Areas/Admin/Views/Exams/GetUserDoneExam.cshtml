@@ -16,7 +16,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.UsersList.FirstOrDefault().Email)
                     </th>
-
+                    <th>
+                        نام و نام خانوادگی
+                    </th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,6 +31,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @item.Name @item.Family
                         </td>
                         <td>
                             <a asp-action="UserExamInfo" class="btn btn-primary" asp-route-UserId="@item.UserId" asp-route-ExamId="@Model.ExamId">نتیجه آزمون</a>

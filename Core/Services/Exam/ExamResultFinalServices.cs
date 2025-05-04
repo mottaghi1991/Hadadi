@@ -25,7 +25,15 @@ namespace Core.Services.Exam
 
         public ExamResultFinal resultFinal(string ResultText)
         {
-          return _master.GetAllEf(a=>a.Title==ResultText).FirstOrDefault();
+            var obj= _master.GetAllEf(a => a.Title == ResultText).FirstOrDefault();
+            if (obj != null) {
+                return obj;
+            }
+             return new ExamResultFinal()
+            {
+                Descript = "لطفا با دفتر موسسه تماس حاصل فرمائید",
+                FinalResult = "لطفا با دفتر موسسه تماس حاصل فرمائید.  <a href=\"tel:09386001031\">09386001031 - </a>\r\n        <a href=\"02144051174\">02144051174 - </a>\r\n        <a href=\"02144072340\">02144072340</a>"
+            };
         }
 
         public IEnumerable<ExamResultFinal> resultFinalByExamId(int ExamId)
@@ -42,5 +50,7 @@ namespace Core.Services.Exam
         {
             return _master.Update(examResultFinal);
         }
+
+      
     }
 }

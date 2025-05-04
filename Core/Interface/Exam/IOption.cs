@@ -11,7 +11,7 @@ namespace Core.Interface.Exam
     {
         public IEnumerable<Option> GetAllOptions();
         public IEnumerable<Option> GetOptionByQuestionId(int QuestionId);
-                public Option Insert(Option Option);
+        public Option Insert(Option Option);
         public Option Update(Option Option);
         public bool Delete(int OptionId);
         public Option GetOptionById(int OptionId);

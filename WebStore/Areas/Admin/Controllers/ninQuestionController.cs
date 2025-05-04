@@ -35,11 +35,17 @@ namespace Personal.Areas.Admin.Controllers
             {
                 return RedirectToAction("Seris");
             }
+            var SeriObj = _inExam.GetSeriById(seriId);
+            if (SeriObj == null)
+            {
+                return NotFound();
+            }
             return View(
                 new NinQuestionViewModel()
                 {
                     SeriId = seriId,
-                SeriTitle=_inExam.GetSeriById(seriId).Title,
+                SeriTitle=SeriObj.Title,
+                SeriNumber=SeriObj.Number,
                     ninQuestions=_ninQuestion.GetNinQuestionBySeriId(seriId)
                 }
                 

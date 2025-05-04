@@ -1,5 +1,6 @@
 ﻿using Core.Dto.ViewModel.Exam;
 using Core.Interface.Exam;
+using Dapper;
 using Data.MasterInterface;
 using Domain.Exam;
 using System;
@@ -41,9 +42,11 @@ namespace Core.Services.Exam
             return _master.Insert(JobQuestion);
         }
 
-        public IEnumerable<JobTestViewModel> ShowJobExamToUser()
+        public IEnumerable<JobTestViewModel> ShowJobExamToUser(int seriShow)
         {
-           return _Showmaster.GetAll("ShowJobExamToUser");
+            DynamicParameters p=new DynamicParameters();
+            p.Add("SeriShow", seriShow, System.Data.DbType.Int32);
+           return _Showmaster.GetAll("ShowJobExamToUser",p);
         }
 
         public JobQuestion Update(JobQuestion JobQuestion)

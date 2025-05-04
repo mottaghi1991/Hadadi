@@ -6,6 +6,7 @@ using Core.Interface.Users;
 using Dapper;
 using Data.MasterInterface;
 using Domain.Exam;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,7 +77,7 @@ namespace Core.Services.Exam
 
         public IEnumerable<UserExam> GetListOfUserExamByUserId(int UserId)
         {
-            return _UserExam.GetAllEf(a => a.UserId == UserId);
+            return _UserExam.GetAllAsQueryable().Include(a=>a.examList).Where(a => a.UserId == UserId).ToList();
         }
 
         public IEnumerable<ExamDetailItem> GetMBTIResultDetailByUserId(int UserId)
@@ -84,6 +85,11 @@ namespace Core.Services.Exam
             DynamicParameters dynamicParameters = new DynamicParameters();
             dynamicParameters.Add("UserId", UserId, System.Data.DbType.Int32);
             return _ExamDetailList.GetAll("GetMBTIResultDetail", dynamicParameters);
+        }
+
+        public UserExam GetUserExamByUserAndExam(int UserId, int ExamId)
+        {
+        return    _UserExam.GetAllEf(a => a.UserId == UserId & a.ExamId == ExamId).FirstOrDefault();
         }
 
         public string HAlandResult(int UserId)
@@ -107,6 +113,26 @@ namespace Core.Services.Exam
             DynamicParameters dynamicParameters = new DynamicParameters();
             dynamicParameters.Add("UserId", UserId, dbType: System.Data.DbType.Int32);
             return _UserExam.GetStringFromDatabase("MBTIResult", dynamicParameters);
+        }
+
+        public bool UpdateExam(ExamList examList)
+        {
+         var obj=_ExamList.Update(examList);
+            if (obj == null)
+                return false;
+            return true;
+        }
+
+        public bool UpdateUserToPay(int UserId, int ExamId)
+        {
+            var obj= GetUserExamByUserAndExam(UserId,ExamId);
+            if (obj != null) {
+                obj.IsPay=true;
+            }
+           if(_UserExam.Update(obj)!=null)
+                return true;
+
+        return false;
         }
 
         public bool UserExistInExam(int userid, int ExamId)

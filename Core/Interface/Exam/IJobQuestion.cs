@@ -12,10 +12,11 @@ namespace Core.Interface.Exam
     public interface IJobQuestion
     {
         public IEnumerable<JobQuestion> GetAll();
-        public IEnumerable<JobTestViewModel> ShowJobExamToUser();
+        public IEnumerable<JobTestViewModel> ShowJobExamToUser(int seriShow);
         public JobQuestion Insert(JobQuestion JobQuestion);
         public JobQuestion Update(JobQuestion JobQuestion);
         public bool Delete(int JobQuestionId);
         public JobQuestion GetQuestionById(int JobQuestionId);
+     
     }
 }

@@ -15,10 +15,18 @@
                     <div class="card-body">
                         @if(Model.Any(a=>a.ExamId==(int)ExamId.Haland))
                         {
-                            <a class="btn btn-primary" asp-action="ExamResult">نتیجه آزمون</a>
+                            if (Model.Any(a => a.ExamId == (int)ExamId.Haland&&a.IsPay==true))
+                            {
+                                <a class="btn btn-danger" asp-action="ExamResult">نتیجه آزمون</a>
+                            }
+                            else{
+                                <a class="btn btn-primary" asp-controller="Payment" asp-action="StartPayment" asp-route-price="@Model.FirstOrDefault(b=>b.ExamId==(int)ExamId.Haland)?.examList?.Price" asp-route-ExamId="@((int)ExamId.Haland)">پرداخت آزمون</a>
+
+                            }
 
                         }
                         else{
+
                             <a class="btn btn-success" asp-action="GetExam">شروع آزمون</a>
 
                         }
@@ -35,11 +43,21 @@
                     <div class="card-body">
                         @if (Model.Any(a => a.ExamId == (int)ExamId.MBTI))
                         {
-                            <a class="btn btn-primary" asp-action="ShowMbtiResult" asp-controller="Exams" asp-area="UserPanel">نتیجه آزمون</a>
+                            if (Model.Any(a => a.ExamId == (int)ExamId.MBTI && a.IsPay == true))
+                            {
+                                <a class="btn btn-danger" asp-action="ShowMbtiResult">نتیجه آزمون</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary" asp-controller="Payment" asp-action="StartPayment" asp-route-price="@Model.FirstOrDefault(b=>b.ExamId==(int)ExamId.MBTI)?.examList?.Price" asp-route-ExamId="@((int)ExamId.MBTI)">پرداخت آزمون</a>
+
+                            }
+
                         }
                         else
                         {
-                              <a class="btn btn-success" asp-action="JobExams" asp-controller="Exams" asp-area="UserPanel">شروع آزمون</a>
+                            <a class="btn btn-success" asp-action="JobExams">شروع آزمون</a>
+
                         }
                     </div>
                 </div>
@@ -53,11 +71,21 @@
                     <div class="card-body">
                         @if (Model.Any(a => a.ExamId == (int)ExamId.Anageram))
                         {
-                            <a class="btn btn-primary" asp-action="Result" asp-controller="Exams" asp-area="UserPanel">نتیجه آزمون</a>
+                            if (Model.Any(a => a.ExamId == (int)ExamId.Anageram && a.IsPay == true))
+                            {
+                                <a class="btn btn-danger" asp-action="Result">نتیجه آزمون</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary" asp-controller="Payment" asp-action="StartPayment" asp-route-price="@Model.FirstOrDefault(b=>b.ExamId==(int)ExamId.Anageram)?.examList?.Price" asp-route-ExamId="@((int)ExamId.Anageram)">پرداخت آزمون</a>
+
+                            }
+
                         }
                         else
                         {
                             <a class="btn btn-success" asp-action="NinExam">شروع آزمون</a>
+
                         }
                       
                     </div>

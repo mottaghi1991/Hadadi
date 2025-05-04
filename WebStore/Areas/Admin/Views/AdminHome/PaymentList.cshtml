@@ -1,0 +1,64 @@
+﻿@using Core.Static
+@model IEnumerable<Domain.Payment.PaymentFinalEvent>
+@{
+    ViewData["Title"] = "PaymentList";
+}
+
+<div class="col-md-12">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">لیست پرداخت ها</h3>
+        </div>
+        <div class="card-body">
+          
+            <table class="table table-sm table-responsive table-hover table-striped text-center" style="width: auto">
+                <thead>
+                    <tr>
+                        <th>نام کاربری</th>
+                        <th>نام و نام خانوادگی</th>
+                        <th>ایمیل</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Price)</th>
+                        <th>@Html.DisplayNameFor(model => model.InsertDate)</th>
+                        <th>عنوان آزمون</th>
+                        <th>@Html.DisplayNameFor(model => model.ref_id)</th>
+                        <th>@Html.DisplayNameFor(model => model.fee)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.myUser.UserName)
+                            </td>
+                            <td>
+                                @item.myUser.Name @item.myUser.Family
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.myUser.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
+                               @item.InsertDate.ChangeToPersian()
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.examList.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ref_id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fee)
+                            </td>
+                         
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

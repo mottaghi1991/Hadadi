@@ -14,7 +14,7 @@
                     <div class="card-header">
                         تعداد گزینه های انتخاب شده
                     </div>
-                    <div class="card-body text-center">
+                    <div class="card-body">
 
                         <table class="table table-sm table-responsive table-hover table-striped text-center" style="width: auto">
                             <thead>
@@ -62,7 +62,7 @@
 
                         <h4>با توجه به گزینه های انتخاب شده شغل های ذیل برای شما مناسب می باشد </h4>
 
-                        @Html.Raw(Model.examResultFinal.FinalResult.Replace(".", ".<br>"))
+                        @Html.Raw(Model.examResultFinal.FinalResult)
 
 
 

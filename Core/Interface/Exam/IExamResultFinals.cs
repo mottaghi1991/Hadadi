@@ -16,5 +16,6 @@ namespace Core.Interface.Exam
         public ExamResultFinal Update(ExamResultFinal examResultFinal);
         public ExamResultFinal Insert(ExamResultFinal examResultFinal);
         public IEnumerable<ExamResultFinal> resultFinalByExamId(int ExamId);
+     
     }
 }

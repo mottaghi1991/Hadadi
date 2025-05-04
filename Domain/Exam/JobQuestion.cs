@@ -13,6 +13,7 @@ namespace Domain.Exam
         [DisplayName("عنوان")]
         [Required(ErrorMessage = "وارد کردن {0} اجباری می باشد")]
         public string  Title{ get; set; }
+        public int SeriShow { get; set; }
         public virtual IEnumerable<JobOption> JobOptions { get; set; }  
         public virtual IEnumerable<JobUserAnswer> JobUserAnswers{ get; set; }  
     }

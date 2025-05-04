@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Edit";
 }
+@section style{
+    <link href="~/Common/ckeditor5/ckeditor5.css" rel="stylesheet" />
+}
 
 <div class="col-md-12">
     <div class="card card-info">
@@ -44,3 +47,67 @@
 
     </div>
 </div>
+@section Scripts
+{
+    <script type="importmap">
+        {
+            "imports": {
+                "ckeditor5": "../../common/ckeditor5/ckeditor5.js",
+                "ckeditor5/": "../../common/ckeditor5/"
+            }
+        }
+    </script>
+    <script type="module">
+        import {
+            ClassicEditor,
+            Essentials,
+            Paragraph,
+            Bold,
+            Italic,
+            Font,
+            Heading,
+            Link,
+            List,
+            Alignment // جهت‌دهی
+        } from 'ckeditor5';
+
+        ClassicEditor.create(document.querySelector('#FinalResult'), {
+            licenseKey: '',
+            plugins: [
+                Essentials,
+                Paragraph,
+                Bold,
+                Italic,
+                Font,
+                Heading,
+                Link,
+                List,
+                Alignment
+            ],
+            toolbar: [
+                'heading', '|', 'bold', 'italic', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
+                'link', 'bulletedList', 'numberedList', '|',
+                'alignment:left', 'alignment:center', 'alignment:right', 'alignment:justify'
+            ],
+            language: 'fa',
+            ui: {
+                language: 'fa'
+            },
+            contentLanguage: 'fa',
+            alignment: {
+                options: ['left', 'right', 'center', 'justify']
+            }
+        })
+        .then(editor => {
+            editor.model.document.on('change:data', () => {
+                const htmlContent = editor.getData();
+                // بدون پردازش تصویر
+            });
+        })
+        .catch(error => {
+            console.error('Error initializing the editor:', error);
+        });
+    </script>
+
+
+}

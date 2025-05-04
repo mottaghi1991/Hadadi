@@ -11,6 +11,7 @@ namespace Core.Dto.ViewModel.Exam
     {
         public int SeriId { get; set; }
         public string SeriTitle { get; set; }
+        public int SeriNumber { get; set; }
         public IEnumerable<NinQuestion> ninQuestions { get; set; }
     }
 }

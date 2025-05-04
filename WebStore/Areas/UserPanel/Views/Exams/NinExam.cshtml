@@ -1,26 +1,48 @@
 ﻿@using Domain.Exam
-@model IEnumerable<Domain.Exam.NinQuestion>
+@model Core.Dto.ViewModel.Exam.NinQuestionViewModel
 @{
     ViewData["Title"] = "NinExam";
     IEnumerable<NinOption> options = ViewBag.NinOptions as IEnumerable<NinOption>;
 }
+@section style{
+    <style>
+        .optioncheck {
+            display: block;
+            background-color: #e0f7fa;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0, 150, 136, 0.3);
+            border: 1px solid #00bfa5;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
+            .optioncheck:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            }
+    </style>
+}
 <div class="card card-primary mt-3">
-    <div class="card-header text-center">آزمون اناگرام</div>
+    <div class="card-header text-center"> آزمون اناگرام سری سوالات   @Model.SeriTitle -@Model.SeriNumber</div>
     <div class="card-body">
-
+      
         <form method="post" asp-action="NinExamSubmit" id="jobTestForm" onsubmit="return validateForm()">
-            @foreach (var question in Model)
+            @foreach (var question in Model.ninQuestions)
             {
                 <div class="mb-3 question-group">
-                    <label><strong>@question.Title</strong></label>
+                    <label>@question.Order-<strong>@question.Title</strong></label>
                     <br />
                     @foreach (var option in options)
                     {
+                        <label class="optioncheck">
                         <input type="radio"
                                name="Answer[@question.Id]"
-                               value="@option.Id" /> @option.Title
-                        <br />
+                               value="@option.Id"  />
+                               @option.Title
+                        </label>
                     }
                 </div>
             }

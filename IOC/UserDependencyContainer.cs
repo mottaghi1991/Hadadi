@@ -2,12 +2,18 @@
 using Core.Dto.ViewModel.User;
 using Core.Interface.Admin;
 using Core.Interface.Exam;
+using Core.Interface.Payment;
+using Core.Interface.Sms;
 using Core.Interface.Users;
 using Core.Services.Exam;
+using Core.Services.Payment;
+using Core.Services.Sms;
 using Core.Services.Users;
 using Data.MasterInterface;
 using Data.MasterServices;
 using Domain.Exam;
+using Domain.Payment;
+using Domain.SMS;
 using Domain.User;
 using Domain.User.Permission;
 using Domain.Users;
@@ -19,7 +25,12 @@ namespace IOC
     {
         public static void RegisterServices(IServiceCollection Services)
         {
+            #region payment
+            //Services.AddScoped<IPaymentGateway, ZarinpalPaymentGateway>();
+            Services.AddHttpClient<IPaymentGateway, ZarinpalPaymentGateway>();
+            
 
+            #endregion
 
             #region Admin
             Services.AddScoped<IUser, UserServices>();
@@ -54,6 +65,7 @@ namespace IOC
             Services.AddScoped<INinExam,NinExamServices>();
             Services.AddScoped<IExamResult,ExamResultServices>();
             Services.AddScoped<IExamResultFinals,ExamResultFinalServices>();
+            Services.AddScoped<IPaymentEventdatabase,PaymentEventDatabaseServices>();
 
 
 
@@ -75,6 +87,8 @@ namespace IOC
             Services.AddScoped<IMaster<NinOption>, MasterServices<NinOption>>();
             Services.AddScoped<IMaster<NinUserAnswer>, MasterServices<NinUserAnswer>>();
             Services.AddScoped<IMaster<ExamList>, MasterServices<ExamList>>();
+            Services.AddScoped<IMaster<PaymentEventDatabase>, MasterServices<PaymentEventDatabase>>();
+            Services.AddScoped<IMaster<PaymentFinalEvent>, MasterServices<PaymentFinalEvent>>();
 
 
 
@@ -85,7 +99,14 @@ namespace IOC
             Services.AddScoped<IMaster<ShowUserBrifViewModel>, MasterServices<ShowUserBrifViewModel>>();
             Services.AddScoped<IMaster<ExamDetailItem>, MasterServices<ExamDetailItem>>();
             #endregion
+            #region Sms
+            Services.AddScoped<ISms, SmsIRServices>();
+            Services.AddScoped<IUserOtp, UserOtpServices>();
 
+
+            Services.AddScoped<IMaster<UserOtp>, MasterServices<UserOtp>>();
+
+            #endregion
         }
     }
 }
