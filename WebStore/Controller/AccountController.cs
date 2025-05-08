@@ -13,7 +13,6 @@ using Core.Services.Users;
 using Core.Tools;
 using Domain.User;
 using Domain.User.Permission;
-using Fuel_Core;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Forms;
